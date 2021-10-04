@@ -1,10 +1,11 @@
 import scrapy
 
+
 class CheckipSpider(scrapy.Spider):
     name = 'checkip'
     start_urls = [
         'http://checkip.amazonaws.com/',
-        'https://cip.cc'
+        'https://cip.cc',
         'http://members.3322.org/dyndns/getip',
         'https://myip.ipip.net/',
 
