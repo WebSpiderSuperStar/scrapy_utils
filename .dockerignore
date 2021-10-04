@@ -1162,3 +1162,4 @@ config.codekit3
 *.retry
 
 .idea
+Logs
