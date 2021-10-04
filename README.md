@@ -1,10 +1,10 @@
 # scrapy_utils
 
+scrapy_utils is configuration template project, Contains the extraction of scrapy configuration
+
 ## requirements
+
 python >= 3.6
-
-
-scrapy_utils is Configure template project, Contains the extraction of scrapy configuration
 
 ## Function
 
@@ -16,6 +16,4 @@ contains the following functions
 - [x] Conveniently configured log
 - [x] Common database connection
 - [x] Distributed configuration
-
-
 
