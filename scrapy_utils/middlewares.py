@@ -5,7 +5,7 @@
 
 import random, base64
 from tools import fakeUserAgent
-from settings import proxyAuth
+from scrapy_utils.settings import proxyAuth
 
 from scrapy import signals
 # useful for handling different item types with a single interface

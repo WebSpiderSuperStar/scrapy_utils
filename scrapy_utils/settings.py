@@ -6,12 +6,11 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-import os
+import os, datetime, random
 from os.path import dirname, abspath, exists
-import datetime
-import random
-from redis import StrictRedis
+
 from environs import Env
+from redis import StrictRedis
 
 today = datetime.datetime.now()
 
@@ -73,7 +72,7 @@ TELNETCONSOLE_ENABLED = False
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     'scrapy_utils.middlewares.ScrapyUtilsDownloaderMiddleware': 543,
-    # 'scrapy_utils.middlewares.MyUserAgentMiddleware': 400,
+    'scrapy_utils.middlewares.RandomUserAgentMiddleware': 400,
     # 'scrapy_utils.middlewares.MyHttpProxyMiddleware': 750,
 }
 
