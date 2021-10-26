@@ -154,59 +154,59 @@ MONGO_URI = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}/{MONGO_HOST}:{MONGO_PORT}/
 
 # @REDIS
 
-# Distributed configuration
-# Redis
-RedisDB = env.int("RedisDB", 0)
-RedisHOST = env.str("RedisHost", "127.0.0.1")
-RedisPORT = env.int("RedisPort", 3213)
-RedisPASSWD = env.str("PASSWD", "x")
-RedisClient = StrictRedis(
-    host=RedisHOST,
-    port=RedisPORT,
-    db=RedisDB,
-    password=RedisPASSWD,
-    health_check_interval=30
-)
-
-# scrapy_redis Distributed configuration
-"""
-Settings
---------
-SCHEDULER_PERSIST : bool (default: False)
-    Whether to persist or clear redis queue.
-SCHEDULER_FLUSH_ON_START : bool (default: False)
-    Whether to flush redis queue on start.
-SCHEDULER_IDLE_BEFORE_CLOSE : int (default: 0)
-    How many seconds to wait before closing if no message is received.
-SCHEDULER_QUEUE_KEY : str
-    Scheduler redis key.
-SCHEDULER_QUEUE_CLASS : str
-    Scheduler queue class.
-SCHEDULER_DUPEFILTER_KEY : str
-    Scheduler dupefilter redis key.
-SCHEDULER_DUPEFILTER_CLASS : str
-    Scheduler dupefilter class.
-SCHEDULER_SERIALIZER : str
-    Scheduler serializer.
-"""
-
-REDIS_URL = f'redis://:{RedisPASSWD}@{RedisHOST}:{RedisPORT}/{RedisDB}'
-SCHEDULER = "scrapy_redis.scheduler.Scheduler"
-
-REDIS_START_URLS_AS_SET = True
-# Whether to clear the queue after crawling（default: True）
-SCHEDULER_PERSIST = True
-
-# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
-SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.FifoQueue'
-# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.LifoQueue'
-
-SCHEDULER_FLUSH_ON_START = False
-
-STATS_CLASS = "scrapy_redis.stats.RedisStatsCollector"
-
-# FILTER
-# DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
-DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
-BLOOMFILTER_HASH_NUMBER = 6
-BLOOMFILTER_BIT = 30
+# # Distributed configuration
+# # Redis
+# RedisDB = env.int("RedisDB", 0)
+# RedisHOST = env.str("RedisHost", "127.0.0.1")
+# RedisPORT = env.int("RedisPort", 3213)
+# RedisPASSWD = env.str("PASSWD", "x")
+# RedisClient = StrictRedis(
+#     host=RedisHOST,
+#     port=RedisPORT,
+#     db=RedisDB,
+#     password=RedisPASSWD,
+#     health_check_interval=30
+# )
+#
+# # scrapy_redis Distributed configuration
+# """
+# Settings
+# --------
+# SCHEDULER_PERSIST : bool (default: False)
+#     Whether to persist or clear redis queue.
+# SCHEDULER_FLUSH_ON_START : bool (default: False)
+#     Whether to flush redis queue on start.
+# SCHEDULER_IDLE_BEFORE_CLOSE : int (default: 0)
+#     How many seconds to wait before closing if no message is received.
+# SCHEDULER_QUEUE_KEY : str
+#     Scheduler redis key.
+# SCHEDULER_QUEUE_CLASS : str
+#     Scheduler queue class.
+# SCHEDULER_DUPEFILTER_KEY : str
+#     Scheduler dupefilter redis key.
+# SCHEDULER_DUPEFILTER_CLASS : str
+#     Scheduler dupefilter class.
+# SCHEDULER_SERIALIZER : str
+#     Scheduler serializer.
+# """
+#
+# REDIS_URL = f'redis://:{RedisPASSWD}@{RedisHOST}:{RedisPORT}/{RedisDB}'
+# SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+#
+# REDIS_START_URLS_AS_SET = True
+# # Whether to clear the queue after crawling（default: True）
+# SCHEDULER_PERSIST = True
+#
+# # SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
+# SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.FifoQueue'
+# # SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.LifoQueue'
+#
+# SCHEDULER_FLUSH_ON_START = False
+#
+# STATS_CLASS = "scrapy_redis.stats.RedisStatsCollector"
+#
+# # FILTER
+# # DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+# DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
+# BLOOMFILTER_HASH_NUMBER = 6
+# BLOOMFILTER_BIT = 30
