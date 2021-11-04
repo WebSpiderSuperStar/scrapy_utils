@@ -15,5 +15,6 @@ def shuffle_ciphers():
 class HTTPDownloadHandler11(HTTPDownloadHandler):
     def download_request(self, request, spider):
         tls_cipher = shuffle_ciphers()
-        self._contextFactory = ScrapyClientContextFactory(tls_ciphers=tls_cipher)
+        self._contextFactory = ScrapyClientContextFactory(
+            tls_ciphers=tls_cipher)
         return super().download_request(request, spider)

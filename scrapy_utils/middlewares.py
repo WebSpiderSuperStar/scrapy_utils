@@ -3,7 +3,8 @@
 # See documentation in:
 # https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-import random, base64
+import random
+import base64
 from tools import fakeUserAgent
 from scrapy_utils.settings import proxyAuth
 

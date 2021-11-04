@@ -1,12 +1,9 @@
 scrapy
 scrapy-redis
 scrapy-redis-bloomfilter
-
 environs
 supervisor
-
 pymysql
 pymongo
 redis
-
 requests
