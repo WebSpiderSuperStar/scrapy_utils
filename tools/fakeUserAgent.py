@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # @File         : fakeUserAgent.py
 # @Date         : 13-04-2021
@@ -16,6 +15,7 @@ systemMark = [
     'Windows NT 6.1; Win64; x64',
     'X11; Linux x86_64',
 ]
+
 firefoxVersions = [
     35.0,
     40.0,
@@ -41,6 +41,7 @@ firefoxVersions = [
     61.0,
     63.0,
 ]
+
 chromeVersions = [
     '37.0.2062.124',
     '40.0.2214.93',
@@ -58,6 +59,7 @@ chromeVersions = [
     '70.0.3538.102',
     '74.0.3729.169',
 ]
+
 operaVersions = [
     '2.7.62 Version / 11.00',
     '2.2.15 Version / 10.10',
