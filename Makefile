@@ -1,7 +1,6 @@
 all: lint test clean
 .PHONY: test lint release clean
 
-
 # system python interpreter. used only to create virtual environment
 PY = python3
 VENV = venv
@@ -14,8 +13,16 @@ ifeq ($(OS), Windows_NT)
     PY=python
 endif
 
+# generate requirements
+REQS:
+	# install pipreqs
+	$(PY) -m pip install -U pipreqs
+	# use pipreqs generate requirements
+	pipreqs --encoding=utf-8 --force
 
-$(VENV): requirements.txt
+
+# build a new VENV env
+$(VENV): requirements.txt $(REQS)
 	$(PY) -m pip install --upgrade -i $(MIRRORS) pip
 	$(PY) -m venv $(VENV);
 	$(BIN)/pip install --upgrade -i $(MIRRORS) pip
@@ -24,14 +31,11 @@ $(VENV): requirements.txt
 	touch $(VENV)
 
 
-test:
+test: $(VENV)
 	$(BIN)/pip install -Ui  $(MIRRORS) pytest
 	-$(BIN)/pytest
 	rm -rf .pytest_cache
 
-reqs:
-	$(PY) -m pip install -U pipreqs
-	pipreqs --encoding=utf-8 --force
 
 lint:
 	$(PY) -m pip install -Ui $(MIRRORS) flake8 autopep8
@@ -42,21 +46,22 @@ lint:
 	-find . -path './venv' -a -prune -o -name "*.py" -print | xargs autopep8 --exclude venv  --in-place
 
 
+clean:
+	-rm -rf $(VENV)
+	-find . -type f -name *.pyc -delete
+	-find . -type d -name __pycache__ -delete
+
+
 release: $(VENV)
 	-$(BIN)/python setup.py sdist bdist_wheel upload
 
 
 source_release:
+	git pull
 	git add -A
 	git commit -m "commit"
 	-git push origin master
 
 
-docker_release:
-	make clean
+docker_release: $(clean)
 	/usr/bin/env bash Deploy/dockerRelease
-
-clean:
-	-rm -rf $(VENV)
-	-find . -type f -name *.pyc -delete
-	-find . -type d -name __pycache__ -delete
