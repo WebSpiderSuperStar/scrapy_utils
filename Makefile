@@ -29,9 +29,12 @@ test:
 	-$(BIN)/pytest
 	rm -rf .pytest_cache
 
+reqs:
+	$(PY) -m pip install -U pipreqs
+	pipreqs --encoding=utf-8 --force
 
 lint:
-	python -m pip install -Ui $(MIRRORS) flake8 autopep8
+	$(PY) -m pip install -Ui $(MIRRORS) flake8 autopep8
 	# stop the build if there are Python syntax errors or undefined names
 	flake8 . --count --select=E9,F63,F7,F82 --show-source --exclude venv --statistics
 	# exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide

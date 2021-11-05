@@ -1,5 +1,3 @@
-import pprint
-
 import scrapy
 
 

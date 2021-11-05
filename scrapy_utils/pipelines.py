@@ -6,12 +6,11 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
-import re
 import redis
 import pymysql
 import pymongo
 import logging
-from scrapy_utils.items import *
+from scrapy_utils.items import __all__
 from twisted.enterprise import adbapi
 from twisted.internet import reactor, defer
 
