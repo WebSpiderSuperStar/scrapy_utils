@@ -19,4 +19,4 @@ contains the following functions
 
 ## Note
 
-Can't change all the time ja3\_ hash
+Can't change all the time ja3_hash
