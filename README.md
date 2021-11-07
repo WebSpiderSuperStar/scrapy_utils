@@ -17,3 +17,6 @@ contains the following functions
 - [x] Common database connection
 - [x] Distributed configuration
 
+## Note
+
+Can't change all the time ja3_hash
