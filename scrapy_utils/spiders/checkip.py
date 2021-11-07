@@ -8,7 +8,6 @@ class CheckipSpider(scrapy.Spider):
         'https://cip.cc',
         'http://members.3322.org/dyndns/getip',
         'https://myip.ipip.net/',
-
     ]
 
     def start_requests(self):
