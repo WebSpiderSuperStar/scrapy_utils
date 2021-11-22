@@ -11,10 +11,15 @@ python >= 3.6
 contains the following functions
 
 - [x] RANDOM USER-AGENT
+
 - [x] PROXY DOCKING
+
 - [x] CHAOTIC TLS FINGERPRINT
+
 - [x] Conveniently configured log
+
 - [x] Common database connection
+
 - [x] Distributed configuration
 
 ## Note
