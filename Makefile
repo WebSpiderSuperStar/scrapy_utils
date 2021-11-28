@@ -52,6 +52,9 @@ clean:
 	-find . -type d -name __pycache__ -delete
 
 
+run:
+	python3 -Bu main.py
+
 release: $(VENV)
 	-$(BIN)/python setup.py sdist bdist_wheel upload
 
