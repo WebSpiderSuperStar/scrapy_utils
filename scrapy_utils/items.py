@@ -5,7 +5,7 @@
 
 from scrapy.item import Item, Field
 
-__all__ = ["ScrapyUtilsItem"]
+__all__ = ("ScrapyUtilsItem",)
 
 
 class ScrapyUtilsItem(Item):

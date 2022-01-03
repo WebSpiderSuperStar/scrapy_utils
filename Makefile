@@ -15,10 +15,13 @@ endif
 
 # generate requirements
 REQS:
-	# install pipreqs
-	$(PY) -m pip install -U pipreqs
-	# use pipreqs generate requirements
-	pipreqs --encoding=utf-8 --force
+	if [[ ---f requirements.txt ]]; then
+		# install pipreqs
+		$(PY) -m pip install -U pipreqs
+		# use pipreqs generate requirements
+		pipreqs --encoding=utf-8 --force
+	fi
+
 
 
 # build a new VENV env
