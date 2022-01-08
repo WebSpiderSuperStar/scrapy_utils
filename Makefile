@@ -23,7 +23,6 @@ REQS:
 	fi
 
 
-
 # build a new VENV env
 $(VENV): requirements.txt $(REQS)
 	$(PY) -m pip install --upgrade -i $(MIRRORS) pip
@@ -57,6 +56,7 @@ clean:
 
 run:
 	python3 -Bu main.py
+
 
 release: $(VENV)
 	-$(BIN)/python setup.py sdist bdist_wheel upload

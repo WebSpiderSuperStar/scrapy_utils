@@ -49,3 +49,41 @@ Can't change all the time ja3_hash
 > now, I have found can you use new terminal to change it,Please clean you ``pycache``,
 >
 > use `find . -type f -name "*.pyc" -delete && find . -type d -name "__pycache__" -delete`
+
+
+## Run
+
+### Docker 
+
+must have that docker image !!!
+
+```bash
+docker run images:tag
+```
+
+### Kubernetes 
+
+```bash
+cat Deploy/Deployment/deployment.yaml | sed 's/\${TAG}/version/g' | kubectl apply  -f -
+```
+
+```bash
+# create
+kubectl create deployment collector \
+        --namespace collector \
+        --image=awesomepayne/collector:20210922092209  \
+        --replicas=5
+
+# set env
+kubectl set env deployment collector \
+        --namespace collector \
+        LOG_LEVEL="ERROR"
+
+# update
+kubectl set image deployment collector \
+        --namespace collector  \
+        collector=awesomepayne/collector:20210906131419
+
+# delete
+kubectl delete deployments.apps collector --namespace collector
+``` 

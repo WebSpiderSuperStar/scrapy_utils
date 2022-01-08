@@ -71,7 +71,7 @@ operaVersions = [
 
 
 def fakeUserAgent():
-    """ constructionChromeUA
+    """constructionChromeUA
     :return: str
     """
     randomSystemMark = choice(systemMark)

@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: collector
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: colletor
+  namespace: collector
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: colletor
+  template:
+    metadata:
+      labels:
+        app: colletor
+    spec:
+      containers:
+        - name: colletor
+          image: awesomepayne/collector:${TAG}
+#          env:
+#            - name: RedisHOST
+#              value: 192.168.0.186
+#            - name: LOG_LEVEL
+#              value: CRITICAL
+#            - name: MYSQL_HOST
+#              value: 192.168.0.67
+#            - name: RedisDB
+#              value: "0"
