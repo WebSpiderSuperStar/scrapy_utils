@@ -6,6 +6,6 @@
 #    python -m pip install -Ur requirements.txt
 
 FROM awesomepayne/collector_appliance:v1
-WORKDIR /code
+WORKDIR /app
 COPY . .
 CMD ["supervisord","-c", "supervisord.conf"]
