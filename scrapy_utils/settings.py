@@ -22,10 +22,10 @@ os.mkdir("Logs") if not exists(f"{ROOT_DIR}/Logs") else None
 env = Env()
 env.read_env()
 
-BOT_NAME = 'scrapy_utils'
+BOT_NAME = "scrapy_utils"
 
-SPIDER_MODULES = ['scrapy_utils.spiders']
-NEWSPIDER_MODULE = 'scrapy_utils.spiders'
+SPIDER_MODULES = ["scrapy_utils.spiders"]
+NEWSPIDER_MODULE = "scrapy_utils.spiders"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'scrapy_utils (+http://www.yourdomain.com)'
@@ -34,17 +34,17 @@ NEWSPIDER_MODULE = 'scrapy_utils.spiders'
 ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = env.int('CONCURRENT_REQUESTS', 16)
+CONCURRENT_REQUESTS = env.int("CONCURRENT_REQUESTS", 16)
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = random.uniform(0, 3)
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = env.int('CONCURRENT_REQUESTS_PER_DOMAIN', 60)
-CONCURRENT_REQUESTS_PER_IP = env.int('CONCURRENT_REQUESTS_PER_IP', 60)
+CONCURRENT_REQUESTS_PER_DOMAIN = env.int("CONCURRENT_REQUESTS_PER_DOMAIN", 60)
+CONCURRENT_REQUESTS_PER_IP = env.int("CONCURRENT_REQUESTS_PER_IP", 60)
 
-REACTOR_THREADPOOL_MAXSIZE = env.int('REACTOR_THREADPOOL_MAXSIZE', 30)
+REACTOR_THREADPOOL_MAXSIZE = env.int("REACTOR_THREADPOOL_MAXSIZE", 30)
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = env.bool("COOKIES_ENABLED", True)
@@ -73,8 +73,8 @@ TELNETCONSOLE_ENABLED = False
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
-    'scrapy_utils.middlewares.ScrapyUtilsDownloaderMiddleware': 543,
-    'scrapy_utils.middlewares.RandomUserAgentMiddleware': 400,
+    "scrapy_utils.middlewares.ScrapyUtilsDownloaderMiddleware": 543,
+    "scrapy_utils.middlewares.RandomUserAgentMiddleware": 400,
     # 'scrapy_utils.middlewares.MyHttpProxyMiddleware': 750,
 }
 
@@ -113,23 +113,27 @@ DOWNLOADER_MIDDLEWARES = {
 
 
 # The cipher of the docking agent
-proxyAuth = env.list('proxyAuth', [])
+proxyAuth = env.list("proxyAuth", [])
 # @Custom handlers
 DOWNLOAD_HANDLERS = {
-    'http': 'scrapy_utils.handler.HTTPDownloadHandler11',
-    'https': 'scrapy_utils.handler.HTTPDownloadHandler11',
+    "http": "scrapy_utils.handler.HTTPDownloadHandler11",
+    "https": "scrapy_utils.handler.HTTPDownloadHandler11",
 }
 
 # LOGGING Configuration
 LOG_ENABLED = env.bool("LOG_ENABLED", True)
-LOG_ENCODING = 'utf-8'
-LOG_FORMATTER = 'scrapy.logformatter.LogFormatter'
+LOG_ENCODING = "utf-8"
+LOG_FORMATTER = "scrapy.logformatter.LogFormatter"
 LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
-LOG_DATEFORMAT = '%Y-%m-%d %H:%M:%S'
+LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
 LOG_LEVEL = env.str("LOG_LEVEL", "INFO")
 LOG_SHORT_NAMES = env.bool("LOG_SHORT_NAMES", True)
 LOG_FILE_ENABLED = False
-LOG_FILE = None if not LOG_FILE_ENABLED else f"{ROOT_DIR}/Logs/{today.year}-{today.month}-{today.day}.log"
+LOG_FILE = (
+    None
+    if not LOG_FILE_ENABLED
+    else f"{ROOT_DIR}/Logs/{today.year}-{today.month}-{today.day}.log"
+)
 
 # Database link
 
@@ -152,7 +156,9 @@ MONGO_DB = env.str("MONGO_DB", "test")
 MONGO_COL = env.str("MONGO_COL", "test")
 
 # MONGO_URI=f"mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]"
-MONGO_URI = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}/{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
+MONGO_URI = (
+    f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}/{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
+)
 
 # @REDIS
 

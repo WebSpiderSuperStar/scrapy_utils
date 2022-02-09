@@ -13,6 +13,7 @@ from scrapy import signals
 
 # useful for handling different item types with a single interface
 
+
 class ScrapyUtilsSpiderMiddleware:
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -57,7 +58,7 @@ class ScrapyUtilsSpiderMiddleware:
             yield r
 
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        spider.logger.info("Spider opened: %s" % spider.name)
 
 
 class ScrapyUtilsDownloaderMiddleware:
@@ -104,22 +105,21 @@ class ScrapyUtilsDownloaderMiddleware:
         pass
 
     def spider_opened(self, spider):
-        spider.logger.info('Spider opened: %s' % spider.name)
+        spider.logger.info("Spider opened: %s" % spider.name)
 
 
 class RandomUserAgentMiddleware:
-
     @staticmethod
     def process_request(request, spider):
-        request.headers.setdefault('User-Agent', fakeUserAgent.fakeUserAgent())
+        request.headers.setdefault("User-Agent", fakeUserAgent.fakeUserAgent())
 
 
 class HttpProxyMiddleware(object):
-
     @staticmethod
     def process_request(request, spider):
         request.headers["Proxy-Authorization"] = "Basic " + base64.urlsafe_b64encode(
-            bytes(random.choice(proxyAuth), "ascii")).decode("utf8")
-        request.meta['proxy'] = "https://http-dyn.abuyun.com:9020"
-        request.headers['Proxy-Connection'] = "close"
+            bytes(random.choice(proxyAuth), "ascii")
+        ).decode("utf8")
+        request.meta["proxy"] = "https://http-dyn.abuyun.com:9020"
+        request.headers["Proxy-Connection"] = "close"
         request.headers["Connection"] = "close"

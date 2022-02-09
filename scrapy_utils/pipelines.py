@@ -17,7 +17,6 @@ logger = logging.getLogger(__name__)
 
 
 class DistortionSQL:
-
     def __init__(self, mysql_client_pool):
         self.mysql_client_pool = mysql_client_pool
 
@@ -28,11 +27,11 @@ class DistortionSQL:
         :return:
         """
         client_param = dict(
-            host=crawler.settings.get('MYSQL_HOST'),
-            db=crawler.settings.get('MYSQL_DATABASE'),
-            user=crawler.settings.get('MYSQL_USER'),
-            passwd=crawler.settings.get('MYSQL_PASSWORD'),
-            charset=crawler.settings.get('MYSQL_CHARSET'),
+            host=crawler.settings.get("MYSQL_HOST"),
+            db=crawler.settings.get("MYSQL_DATABASE"),
+            user=crawler.settings.get("MYSQL_USER"),
+            passwd=crawler.settings.get("MYSQL_PASSWORD"),
+            charset=crawler.settings.get("MYSQL_CHARSET"),
             cursorclass=pymysql.cursors.DictCursor,
             use_unicode=True,
             cp_reconnect=True,
@@ -49,21 +48,20 @@ class DistortionSQL:
 
 
 class DistortionMongo:
-
     def __init__(self, mongo_uri, mongo_db, mongo_col):
         self.client = pymongo.MongoClient(mongo_uri)
         self.mongodb = self.client[mongo_db]
         self.mongo_uri = mongo_uri
         self.mongo_db = mongo_db
         self.mongo_col = mongo_col
-        self.mongo_col.create_index('id', unique=True)
+        self.mongo_col.create_index("id", unique=True)
 
     @classmethod
     def from_crawler(cls, crawler):
         return cls(
-            mongo_uri=crawler.settings.get('MONGO_URI'),
-            mongo_db=crawler.settings.get('MONGO_DB'),
-            mongo_col=crawler.settings.get('MONGO_COL'),
+            mongo_uri=crawler.settings.get("MONGO_URI"),
+            mongo_db=crawler.settings.get("MONGO_DB"),
+            mongo_col=crawler.settings.get("MONGO_COL"),
         )
 
     def close_spider(self, spider):
@@ -86,7 +84,6 @@ class RedisPoolClient:
 
 
 class BaiDuBaiKePipeline(DistortionSQL):
-
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             self.mysql_client_pool.runInteraction(self.insertPaper, item)
@@ -98,7 +95,6 @@ class BaiDuBaiKePipeline(DistortionSQL):
 
 
 class MongoExamplePipeline(DistortionMongo):
-
     @defer.inlineCallbacks
     def process_item(self, item, spider):
         out = defer.Deferred()
@@ -118,7 +114,7 @@ class RedisExamplePipeline(RedisPoolClient):
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             item_dict = dict(item)
-            for msg in item_dict.get('detail_id'):
-                self.RDSPool.sadd('WanFangJournalIdItem', msg)
+            for msg in item_dict.get("detail_id"):
+                self.RDSPool.sadd("WanFangJournalIdItem", msg)
             self.RDSPool.execute()
         return item
