@@ -1,10 +1,9 @@
 FROM python:3.7-alpine as build
 COPY requirements.txt .
-RUN apk update &&\
-    apk add --no-cache gcc g++ libffi-dev openssl-dev libxml2-dev libxslt-dev build-base musl-dev &&\
-    pip install -U pip &&\
+RUN apk update && \
+    apk add --no-cache gcc g++ libffi-dev openssl-dev libxml2-dev libxslt-dev build-base musl-dev && \
+    pip install -U pip && \
     pip install --timeout 30 --user --no-cache-dir --no-warn-script-location -r requirements.txt
-
 
 FROM python:3.7-alpine
 ENV APP_ENV=prod

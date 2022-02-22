@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 # Build and release docker image
 
 ## some Environment variable
@@ -8,10 +8,10 @@ dateTag=$(date "+%Y%m%d%H%M%S")
 ImageTag=${dockerUser}/${pkgName}:${dateTag}
 
 ## build images
-docker build -f Deploy/Dockerfile -t ${ImageTag} .
+docker build -f Deploy/Dockerfile -t "${ImageTag}" .
 
 ## release
-docker push ${ImageTag}
+docker push "${ImageTag}"
 if [[ $? == 0 ]]; then
     echo -e "Successfully published Image：\n\n\t\t ${ImageTag} \t\t\n"
 else

@@ -70,4 +70,4 @@ source_release:
 
 
 docker_release: $(clean)
-	/usr/bin/env bash Deploy/dockerRelease
+	bash Deploy/dockerRelease
