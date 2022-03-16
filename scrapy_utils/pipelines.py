@@ -48,6 +48,7 @@ class DistortionSQL:
 
 
 class DistortionMongo:
+
     def __init__(self, mongo_uri, mongo_db, mongo_col):
         self.client = pymongo.MongoClient(mongo_uri)
         self.mongodb = self.client[mongo_db]
@@ -58,6 +59,7 @@ class DistortionMongo:
 
     @classmethod
     def from_crawler(cls, crawler):
+
         return cls(
             mongo_uri=crawler.settings.get("MONGO_URI"),
             mongo_db=crawler.settings.get("MONGO_DB"),
@@ -65,25 +67,30 @@ class DistortionMongo:
         )
 
     def close_spider(self, spider):
+
         self.client.close()
 
 
 class RedisPoolClient:
     def __init__(self, REDPool):
+
         self.RDSPool = REDPool
 
     @classmethod
     def from_crawler(cls, crawler):
+
         REDIS_URL = crawler.settings.get("REDIS_URL")
         pool = redis.ConnectionPool.from_url(REDIS_URL)
         REDPool = redis.Redis(connection_pool=pool).pipeline(transaction=False)
         return cls(REDPool)
 
     def close(self, spider):
+
         self.RDSPool.close()
 
 
 class BaiDuBaiKePipeline(DistortionSQL):
+
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             self.mysql_client_pool.runInteraction(self.insertPaper, item)
@@ -95,6 +102,7 @@ class BaiDuBaiKePipeline(DistortionSQL):
 
 
 class MongoExamplePipeline(DistortionMongo):
+
     @defer.inlineCallbacks
     def process_item(self, item, spider):
         out = defer.Deferred()
@@ -104,6 +112,7 @@ class MongoExamplePipeline(DistortionMongo):
         return item
 
     def _insert(self, item, out, spider):
+
         if isinstance(item, ScrapyUtilsItem):
             self.mongodb[self.mongo_col].insert_many(dict(item))
             reactor.callFromThread(out.callback, item)
@@ -111,6 +120,7 @@ class MongoExamplePipeline(DistortionMongo):
 
 
 class RedisExamplePipeline(RedisPoolClient):
+
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             item_dict = dict(item)
