@@ -73,9 +73,10 @@ TELNETCONSOLE_ENABLED = False
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    'scrapy_utils.middlewares.ScrapyUtilsSpiderMiddleware': 543,
-# }
+SPIDER_MIDDLEWARES = {
+    'scrapy_utils.middlewares.ScrapyUtilsSpiderMiddleware': 543,
+    # 'scrapy_splash.SplashDeduplicateArgsMiddleware': 100,
+}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
@@ -83,6 +84,9 @@ DOWNLOADER_MIDDLEWARES = {
     "scrapy_utils.middlewares.ScrapyUtilsDownloaderMiddleware": 543,
     "scrapy_utils.middlewares.RandomUserAgentMiddleware": 400,
     # 'scrapy_utils.middlewares.MyHttpProxyMiddleware': 750,
+    # 'scrapy_splash.SplashCookiesMiddleware': 723,
+    # 'scrapy_splash.SplashMiddleware': 725,
+    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
 # Enable or disable extensions
@@ -169,18 +173,19 @@ MONGO_URI = (
 # @REDIS
 
 # # Distributed configuration
-# # Redis
-# RedisDB = env.int("RedisDB", 0)
-# RedisHOST = env.str("RedisHost", "127.0.0.1")
-# RedisPORT = env.int("RedisPort", 3213)
-# RedisPASSWD = env.str("PASSWD", "x")
-# RedisClient = StrictRedis(
-#     host=RedisHOST,
-#     port=RedisPORT,
-#     db=RedisDB,
-#     password=RedisPASSWD,
-#     health_check_interval=30
-# )
+# redis host
+REDIS_HOST = env.str("REDIS_HOST", "127.0.0.1")
+# redis port
+REDIS_PORT = env.int("REDIS_PORT", 6379)
+# redis password, if no password, set it to None
+REDIS_PASSWORD = env.str("REDIS_PASSWORD", None)
+# redis db, if no choice, set it to 0
+REDIS_DB = env.int("REDIS_DB", 0)
+# redis connection string, like
+# redis://[password]@host:port or redis://[password]@host:port/0,
+REDIS_CONNECTION_STRING = env.str(
+    "REDIS_CONNECTION_STRING", "redis://default:redis-redis123@150.158.3.190:3218/0"
+)
 #
 # # scrapy_redis Distributed configuration
 # """
@@ -204,7 +209,7 @@ MONGO_URI = (
 #     Scheduler serializer.
 # """
 #
-# REDIS_URL = f'redis://:{RedisPASSWD}@{RedisHOST}:{RedisPORT}/{RedisDB}'
+# REDIS_URL = REDIS_CONNECTION_STRING
 # SCHEDULER = "scrapy_redis.scheduler.Scheduler"
 #
 # REDIS_START_URLS_AS_SET = True
@@ -224,3 +229,9 @@ MONGO_URI = (
 # DUPEFILTER_CLASS = "scrapy_redis_bloomfilter.dupefilter.RFPDupeFilter"
 # BLOOMFILTER_HASH_NUMBER = 6
 # BLOOMFILTER_BIT = 30
+
+
+SPLASH_URL = 'http://localhost:8050'
+
+DUPEFILTER_CLASS = 'scrapy_splash.SplashAwareDupeFilter'
+HTTPCACHE_STORAGE = 'scrapy_splash.SplashAwareFSCacheStorage'
