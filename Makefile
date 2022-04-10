@@ -28,7 +28,7 @@ $(VENV): requirements.txt $(REQS)
 	$(PY) -m pip install --upgrade -i $(MIRRORS) pip
 	$(PY) -m venv $(VENV);
 	$(BIN)/pip install --upgrade -i $(MIRRORS) pip
-	if [ -f requirements.txt ]; then $(BIN)/pip install -Ur requirements.txt; fi
+	[[ -f requirements.txt ]] && $(BIN)/pip install -Ur requirements.txt
 	-$(BIN)/pip install -e .
 	touch $(VENV)
 

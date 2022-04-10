@@ -9,7 +9,7 @@
 import os
 import datetime
 import random
-from os.path import dirname, abspath, exists
+from os.path import dirname, abspath, join, exists
 
 from environs import Env
 from redis import StrictRedis
@@ -17,10 +17,17 @@ from redis import StrictRedis
 today = datetime.datetime.now()
 
 ROOT_DIR = dirname(dirname(abspath(__file__)))
-os.mkdir("Logs") if not exists(f"{ROOT_DIR}/Logs") else None
+
 # Environment configuration
 env = Env()
 env.read_env()
+LOG_DIR = join(ROOT_DIR, env.str("LOG_DIR", "Logs"))
+DEV_MODE, TEST_MODE, PROD_MODE = "dev", "test", "prod"
+APP_ENV = env.str("APP_ENV", DEV_MODE).lower()
+APP_DEBUG = env.bool("APP_DEBUG", APP_ENV == DEV_MODE)
+APP_DEV = IS_DEV = APP_ENV == DEV_MODE
+APP_PROD = IS_PROD = APP_ENV == PROD_MODE
+APP_TEST = IS_TEST = APP_ENV == TEST_MODE
 
 BOT_NAME = "scrapy_utils"
 
@@ -120,20 +127,19 @@ DOWNLOAD_HANDLERS = {
     "https": "scrapy_utils.handler.HTTPDownloadHandler11",
 }
 
+LOG_LEVEL_MAP = {DEV_MODE: "DEBUG", TEST_MODE: "INFO", PROD_MODE: "ERROR"}
+
 # LOGGING Configuration
+None if exists(LOG_DIR) else os.mkdir(LOG_DIR)
 LOG_ENABLED = env.bool("LOG_ENABLED", True)
 LOG_ENCODING = "utf-8"
 LOG_FORMATTER = "scrapy.logformatter.LogFormatter"
 LOG_FORMAT = "%(asctime)s [%(name)s] %(levelname)s: %(message)s"
 LOG_DATEFORMAT = "%Y-%m-%d %H:%M:%S"
-LOG_LEVEL = env.str("LOG_LEVEL", "INFO")
+LOG_LEVEL = LOG_LEVEL_MAP.get(APP_ENV)
 LOG_SHORT_NAMES = env.bool("LOG_SHORT_NAMES", True)
-LOG_FILE_ENABLED = False
-LOG_FILE = (
-    None
-    if not LOG_FILE_ENABLED
-    else f"{ROOT_DIR}/Logs/{today.year}-{today.month}-{today.day}.log"
-)
+LOG_FILE_ENABLED = env.bool('LOG_FILE_ENABLED', False)
+LOG_FILE = f"{LOG_DIR}/{today.year}-{today.month}-{today.day}.log" if LOG_FILE_ENABLED else None
 
 # Database link
 
