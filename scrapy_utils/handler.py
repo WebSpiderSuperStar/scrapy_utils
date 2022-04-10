@@ -24,12 +24,11 @@ def shuffle_ciphers():
     ciphers = ORIGIN_CIPHERS.split(":")
     random.shuffle(ciphers)
     ciphers = ":".join(ciphers)
-    return ciphers + ":!aNULL:!MD5:!DSS"
+    return f"{ciphers}:!aNULL:!MD5:!DSS"
 
 
 class HTTPDownloadHandler11(HTTPDownloadHandler):
     def download_request(self, request, spider):
         tls_cipher = shuffle_ciphers()
-        self._contextFactory = ScrapyClientContextFactory(
-            tls_ciphers=tls_cipher)
+        self._contextFactory = ScrapyClientContextFactory(tls_ciphers=tls_cipher)
         return super().download_request(request, spider)

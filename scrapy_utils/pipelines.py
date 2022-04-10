@@ -48,7 +48,6 @@ class DistortionSQL:
 
 
 class DistortionMongo:
-
     def __init__(self, mongo_uri, mongo_db, mongo_col):
         self.client = pymongo.MongoClient(mongo_uri)
         self.mongodb = self.client[mongo_db]
@@ -90,7 +89,6 @@ class RedisPoolClient:
 
 
 class BaiDuBaiKePipeline(DistortionSQL):
-
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             self.mysql_client_pool.runInteraction(self.insertPaper, item)
@@ -102,7 +100,6 @@ class BaiDuBaiKePipeline(DistortionSQL):
 
 
 class MongoExamplePipeline(DistortionMongo):
-
     @defer.inlineCallbacks
     def process_item(self, item, spider):
         out = defer.Deferred()
@@ -120,7 +117,6 @@ class MongoExamplePipeline(DistortionMongo):
 
 
 class RedisExamplePipeline(RedisPoolClient):
-
     def process_item(self, item, spider):
         if isinstance(item, ScrapyUtilsItem):
             item_dict = dict(item)
