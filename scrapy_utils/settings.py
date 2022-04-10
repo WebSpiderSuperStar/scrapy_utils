@@ -184,7 +184,7 @@ REDIS_DB = env.int("REDIS_DB", 0)
 # redis connection string, like
 # redis://[password]@host:port or redis://[password]@host:port/0,
 REDIS_CONNECTION_STRING = env.str(
-    "REDIS_CONNECTION_STRING", "redis://default:redis-redis123@150.158.3.190:3218/0"
+    "REDIS_CONNECTION_STRING", "redis://default:passwd@127.0.0.1:6379/0"
 )
 #
 # # scrapy_redis Distributed configuration
