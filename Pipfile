@@ -13,6 +13,7 @@ requests = "*"
 Scrapy = "*"
 Scrapy-Redis-BloomFilter = "*"
 PyMySQL = "*"
+scrapy-splash = "*"
 
 [dev-packages]
 

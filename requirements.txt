@@ -1,6 +1,7 @@
 scrapy
 scrapy-redis
 scrapy-redis-bloomfilter
+scrapy-splash
 environs
 supervisor
 pymysql
