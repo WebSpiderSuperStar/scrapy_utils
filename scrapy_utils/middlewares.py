@@ -6,7 +6,7 @@
 import random
 import base64
 from scrapy_utils.settings import proxyAuth
-
+from fake_useragent import UserAgent
 from scrapy import signals
 
 
@@ -108,7 +108,7 @@ class ScrapyUtilsDownloaderMiddleware:
 class RandomUserAgentMiddleware:
     @staticmethod
     def process_request(request, spider):
-        request.headers.setdefault("User-Agent", fakeUserAgent.fakeUserAgent())
+        request.headers.setdefault("User-Agent", UserAgent(verify=False).random)
 
 
 class HttpProxyMiddleware(object):

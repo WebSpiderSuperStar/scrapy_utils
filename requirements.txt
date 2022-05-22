@@ -8,4 +8,5 @@ pymysql
 pymongo
 redis
 requests
-fake_headers
+fake-headers
+fake-useragent
