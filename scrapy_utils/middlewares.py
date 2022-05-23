@@ -108,7 +108,7 @@ class ScrapyUtilsDownloaderMiddleware:
 class RandomUserAgentMiddleware:
     @staticmethod
     def process_request(request, spider):
-        request.headers.setdefault("User-Agent", UserAgent(verify=False).random)
+        request.headers.setdefault("User-Agent", UserAgent(verify_ssl=False).random)
 
 
 class HttpProxyMiddleware(object):

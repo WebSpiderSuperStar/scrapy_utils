@@ -66,7 +66,7 @@ DOWNLOAD_TIMEOUT = env.int("DOWNLOAD_TIMEOUT", 30)
 TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-DEFAULT_REQUEST_HEADERS = Headers(headers=True).generate()
+# DEFAULT_REQUEST_HEADERS = Headers(headers=True).generate()
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
@@ -79,7 +79,7 @@ SPIDER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 DOWNLOADER_MIDDLEWARES = {
     "scrapy_utils.middlewares.ScrapyUtilsDownloaderMiddleware": 543,
-    # "scrapy_utils.middlewares.RandomUserAgentMiddleware": 400,
+    "scrapy_utils.middlewares.RandomUserAgentMiddleware": 400,
     # 'scrapy_utils.middlewares.MyHttpProxyMiddleware': 750,
     # 'scrapy_splash.SplashCookiesMiddleware': 723,
     # 'scrapy_splash.SplashMiddleware': 725,

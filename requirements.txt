@@ -8,5 +8,6 @@ pymysql
 pymongo
 redis
 requests
+twisted
 fake-headers
 fake-useragent
