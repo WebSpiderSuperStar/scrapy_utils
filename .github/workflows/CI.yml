@@ -23,7 +23,6 @@ on:
       - '**/*.md'
       - '**/*.txt'
 
-
 jobs:
   build:
     name: Test it On ${{matrix.os}} and ${{matrix.python-version}}
