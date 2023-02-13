@@ -1,5 +1,4 @@
 all: lint test clean
-.PHONY: test lint release clean
 
 # system python interpreter. used only to create virtual environment
 PY = python3
@@ -49,9 +48,8 @@ lint:
 
 
 clean:
-	-rm -rf $(VENV)
-	-find . -type f -name *.pyc -delete
-	-find . -type d -name __pycache__ -delete
+	@rm -rf $(VENV)
+	@find . -type f -name *.pyc -delete && find . -type d -name __pycache__ -delete
 
 
 run:
@@ -63,10 +61,7 @@ release: $(VENV)
 
 
 source_release:
-	git pull
-	git add -A
-	git commit -m "commit"
-	-git push origin master
+	@git pull && git add -A && git commit -am `date +'%Y%m%d%H%M%S'` && git push -u origin
 
 
 docker_release: $(clean)

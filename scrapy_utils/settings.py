@@ -6,13 +6,12 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-import os
 import datetime
+import os
 import random
-from os.path import dirname, abspath, join, exists
-from fake_headers import Headers
+from os.path import dirname, abspath, join
+
 from environs import Env
-from redis import StrictRedis
 
 today = datetime.datetime.now()
 
@@ -83,7 +82,7 @@ DOWNLOADER_MIDDLEWARES = {
     # 'scrapy_utils.middlewares.MyHttpProxyMiddleware': 750,
     # 'scrapy_splash.SplashCookiesMiddleware': 723,
     # 'scrapy_splash.SplashMiddleware': 725,
-    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+    # 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810
 }
 
 # Enable or disable extensions
@@ -131,7 +130,7 @@ DOWNLOAD_HANDLERS = {
 LOG_LEVEL_MAP = {DEV_MODE: "DEBUG", TEST_MODE: "INFO", PROD_MODE: "ERROR"}
 
 # LOGGING Configuration
-None if exists(LOG_DIR) else os.mkdir(LOG_DIR)
+os.makedirs(os.path.join('..', LOG_DIR), exist_ok=True)
 LOG_ENABLED = env.bool("LOG_ENABLED", True)
 LOG_ENCODING = "utf-8"
 LOG_FORMATTER = "scrapy.logformatter.LogFormatter"
@@ -163,9 +162,7 @@ MONGO_DB = env.str("MONGO_DB", "test")
 MONGO_COL = env.str("MONGO_COL", "test")
 
 # MONGO_URI=f"mongodb://[username:password@]host1[:port1][,host2[:port2],...[,hostN[:portN]]][/[database][?options]]"
-MONGO_URI = (
-    f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}/{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
-)
+MONGO_URI = f"mongodb://{MONGO_USER}:{MONGO_PASSWORD}/{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}"
 
 # @REDIS
 
