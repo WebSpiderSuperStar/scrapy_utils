@@ -70,20 +70,21 @@ cat Deploy/Deployment/deployment.yaml | sed 's/\${TAG}/version/g' | kubectl appl
 ```bash
 # create
 kubectl create deployment collector \
-        --namespace collector \
-        --image=awesomepayne/collector:20210922092209  \
-        --replicas=5
+  --namespace collector \
+  --image=awesomepayne/collector:20210922092209 \
+  --replicas=5
 
 # set env
 kubectl set env deployment collector \
-        --namespace collector \
-        LOG_LEVEL="ERROR"
+  --namespace collector \
+  LOG_LEVEL="ERROR"
 
 # update
 kubectl set image deployment collector \
-        --namespace collector  \
-        collector=awesomepayne/collector:20210906131419
+  --namespace collector \
+  collector=awesomepayne/collector:20210906131419
 
 # delete
 kubectl delete deployments.apps collector --namespace collector
+
 ``` 
