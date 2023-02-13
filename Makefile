@@ -63,6 +63,8 @@ release: $(VENV)
 source_release:
 	@git pull && git add -A && git commit -am `date +'%Y%m%d%H%M%S'` && git push -u origin
 
+archive_project:
+	@git tag -a `date +'%Y%m%d%H%M%S'` -m "archive `date +'%Y%m%d%H%M%S'`" && git push origin --tags
 
 docker_release: $(clean)
 	bash Deploy/dockerRelease
